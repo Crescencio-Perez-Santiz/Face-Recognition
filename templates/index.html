@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reconocimiento Facial</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/estilo.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reconocimiento Facial</h1>
+      <div class="video-container">
+        <img id="video" src="{{ url_for('video_feed') }}" />
+      </div>
+      <div class="info">
+        <h2 id="estado">¿Hay un Crescencio?</h2>
+      <div/>
+    </div>
+  </body>
+  <script>
+    setInterval(function() {
+      fetch('/estado')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('estado').innerText = '¿Hay un Crescencio? ' + data.estado;
+        });
+    }, 1000);
+  </script>
+</html>
